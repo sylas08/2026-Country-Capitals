@@ -18,8 +18,11 @@ class StartGame:
 
         # Strings for labels
         intro_string = ("In each round you will be invited to complete a quiz game."
+                        " \n"
                         " \nYour goal is to beat the game and guess the capital cities. You have to complete"
+                        " \n"
                         " the game and you decide the amount of rounds/games you want to play."
+                        " \n"
                         " \nIf you find anything troubling please go to the hints/help tab."
                         )
 
@@ -58,7 +61,7 @@ class StartGame:
 
         # Create play button...
         self.play_button = Button(self.entry_area_frame, font=("Arial", 16, "bold"),
-                                  fg="#FFFFFF", bg="#0057D8", text="Play", width=10,
+                                  fg="#FFFFFF", bg="#6DB2FF", text="Play!", width=10,
                                   command=self.check_rounds)
         self.play_button.grid(row=0, column=1)
 
@@ -74,18 +77,16 @@ class StartGame:
         self.choose_label.config(fg="#009900", font=("Arial", 12, "bold"))
         self.num_rounds_entry.config(bg="#FFFFFF")
 
-        error = "Oops - Please choose a whole number more than zero."
+        error = "Oops - Please choose a whole number more than zero or the game/rounds will not begin."
         has_errors = "no"
 
         # checks that amount to be converted is a number above absolute zero
         try:
             rounds_wanted = int(rounds_wanted)
             if rounds_wanted > 0:
-                # Invoke Play Class (and take across number of rounds)
-                Play(rounds_wanted)
-                # Hide root window (ie: hide rounds choice window).
-                root.withdraw()
-
+                # temporary success message, replace with call to PlayGame class
+                self.choose_label.config(text=f"You have chosen to play {rounds_wanted} round/s. "
+                                              f"Good luck! 🍀")
             else:
                 has_errors = "yes"
 
@@ -99,30 +100,6 @@ class StartGame:
             self.num_rounds_entry.config(bg="#F4CCCC")
             self.num_rounds_entry.delete(0, END)
 
-
-class Play:
-    """
-    Interface for play the Capital Cities Game
-    """
-
-    def __init__(self, how_many):
-        self.play_box = Toplevel()
-
-        self.game_frame = Frame(self.play_box)
-        self.game_frame.grid(padx=10, pady=10)
-
-        self.game_heading_label = Label(self.game_frame, text=f"Round - of {how_many}",
-                                        font=("Arial", 16, "bold"))
-        self.game_heading_label.grid(row=0)
-
-        self.end_game_button = Button(self.game_frame, text="End Game", font=("Arial", 16, "bold"), fg="#FFFFFF", bg="#990000", width=10, command=self.close_play)
-        self.end_game_button.grid(row=1)
-
-    def close_play(self):
-        # reshow root (ie: choose rounds) and end current
-        # game / allow new game to start
-        root.deiconify()
-        self.play_box.destroy()
 
 # main routine
 if __name__ == "__main__":

@@ -18,8 +18,11 @@ class StartGame:
 
         # Strings for labels
         intro_string = ("In each round you will be invited to complete a quiz game."
+                        " \n"
                         " \nYour goal is to beat the game and guess the capital cities. You have to complete"
+                        " \n"
                         " the game and you decide the amount of rounds/games you want to play."
+                        " \n"
                         " \nIf you find anything troubling please go to the hints/help tab."
                         )
 
@@ -28,7 +31,7 @@ class StartGame:
 
         # List of labels to be made (text | font | fg)
         start_labels_list = [
-            ["Capital Cities", ("Arial", 16, "bold"), None],
+            ["Country Capitals", ("Arial", 16, "bold"), None],
             [intro_string, ("Arial", 12), None],
             [choose_string, ("Arial", 12, "bold"), "#009900"]
         ]
