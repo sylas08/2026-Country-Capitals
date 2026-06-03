@@ -31,7 +31,7 @@ class StartGame:
 
         # List of labels to be made (text | font | fg)
         start_labels_list = [
-            ["Capital Cities", ("Arial", 16, "bold"), None],
+            ["Country Capitals", ("Arial", 16, "bold"), None],
             [intro_string, ("Arial", 12), None],
             [choose_string, ("Arial", 12, "bold"), "#009900"]
         ]
@@ -104,6 +104,6 @@ class StartGame:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Capital Cities")
+    root.title("Country Capitals")
     StartGame()
     root.mainloop()
