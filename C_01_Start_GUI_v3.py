@@ -20,13 +20,19 @@ class StartGame:
         intro_string = ("In each round you will be invited to complete a quiz game. "
                         "Your goal is to beat the game and guess the capital cities. "
                         "You have to complete the game and you decide the amount of "
-                        "rounds/games you want to play.")
+                        "rounds/games you want to play.\n\n"
+                        "Correct Answer: +10 points\n"
+                        "Correct Answer using 50/50: +4 points\n"
+                        "False Answer: -3 points\n"
+                        "False Answer using 50/50: -5 points\n\n"
+                        "(The 50/50 component gives more opportunity to answer the question correctly, "
+                        "so wrong answers using them cost more!)")
 
         choose_string = "How many rounds do you want to play?"
 
         # List of labels to be made (text | font | fg)
         start_labels_list = [
-            ["Capital Cities Quiz", ("Arial", 16, "bold"), None],
+            ["Capital Cities🌍", ("Arial", 16, "bold"), None],
             [intro_string, ("Arial", 12), None],
             [choose_string, ("Arial", 12, "bold"), "#009900"]
         ]
@@ -78,8 +84,15 @@ class StartGame:
         try:
             rounds_wanted = int(rounds_wanted)
             if rounds_wanted > 0:
-                # Temporary success message (replace with Play class call later)
-                self.choose_label.config(text=f"You have chosen to play {rounds_wanted} round/s")
+                # Clear entry box and reset instruction label
+                self.num_rounds_entry.delete(0, END)
+                self.choose_label.config(text="How many rounds do you want to play?")
+
+                # Invoke Play class and take across number of rounds
+                Play(rounds_wanted)
+                # Hide root window (ie: hide rounds choice window)
+                root.withdraw()
+
             else:
                 has_errors = "yes"
 
@@ -94,9 +107,38 @@ class StartGame:
             self.num_rounds_entry.delete(0, END)
 
 
+class Play:
+    """
+    Interface for playing the Capital Cities Quiz
+    """
+
+    def __init__(self, how_many):
+        self.play_box = Toplevel()
+        self.play_box.title("Capital Cities Quiz")
+
+        self.game_frame = Frame(self.play_box)
+        self.game_frame.grid(padx=10, pady=10)
+
+        self.game_heading_label = Label(self.game_frame,
+                                        text=f"Round - of {how_many}",
+                                        font=("Arial", 16, "bold"))
+        self.game_heading_label.grid(row=0)
+
+        self.end_game_button = Button(self.game_frame, text="End Game",
+                                      font=("Arial", 16, "bold"),
+                                      fg="#FFFFFF", bg="#990000", width=10,
+                                      command=self.close_play)
+        self.end_game_button.grid(row=1)
+
+    def close_play(self):
+        # Reshow root (ie: choose rounds) and end current game
+        root.deiconify()
+        self.play_box.destroy()
+
+
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Capital Cities Quiz")
+    root.title("Capital Cities")
     StartGame()
     root.mainloop()
