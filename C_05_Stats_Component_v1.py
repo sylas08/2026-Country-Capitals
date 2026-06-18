@@ -68,7 +68,7 @@ class Play:
         self.rounds_played.set(5)
 
         self.play_box = Toplevel()
-        self.play_box.title("Capital Cities")
+        self.play_box.title("Country Capitals")
 
         self.game_frame = Frame(self.play_box)
         self.game_frame.grid(padx=10, pady=10)
@@ -193,6 +193,6 @@ class Stats:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Capital Cities Quiz")
+    root.title("Capital Cities")
     StartGame()
     root.mainloop()

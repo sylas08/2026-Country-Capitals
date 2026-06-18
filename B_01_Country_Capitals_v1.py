@@ -536,6 +536,6 @@ class Stats:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Country Capital Quiz")
+    root.title("Capital Cities")
     StartGame()
     root.mainloop()
