@@ -114,7 +114,7 @@ class Play:
 
     def __init__(self, how_many):
         self.play_box = Toplevel()
-        self.play_box.title("Capital Cities Quiz")
+        self.play_box.title("Country capitals🌍")
 
         self.game_frame = Frame(self.play_box)
         self.game_frame.grid(padx=10, pady=10)

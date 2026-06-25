@@ -449,7 +449,7 @@ class Stats:
         # Extract information from the stats bundle
         final_score    = all_stats_info[0]
         correct_count  = all_stats_info[1]
-        wrong_count    = all_stats_info[2]
+        false_count    = all_stats_info[2]
         rounds_played  = all_stats_info[3]
 
         self.stats_box = Toplevel()
@@ -474,7 +474,7 @@ class Stats:
         # Build stats strings
         final_score_string   = f"Final Score:       {final_score}"
         correct_string       = f"Correct Answers:   {correct_count}"
-        wrong_string         = f"Wrong Answers:     {wrong_count}"
+        false_string         = f"Wrong Answers:     {false_count}"
         accuracy_string      = f"Accuracy:          {accuracy:.0f}%"
 
         # Custom comment based on accuracy
@@ -501,7 +501,7 @@ class Stats:
             ["Statistics",      heading_font, ""],
             [final_score_string,  normal_font, "W"],
             [correct_string,      normal_font, "W"],
-            [wrong_string,        normal_font, "W"],
+            [false_string,        normal_font, "W"],
             [accuracy_string,     normal_font, "W"],
             [comment_string,     comment_font, "W"],
         ]

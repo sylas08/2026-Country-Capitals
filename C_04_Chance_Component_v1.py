@@ -45,12 +45,12 @@ class Play:
 
     def __init__(self, how_many):
         self.play_box = Toplevel()
-        self.play_box.title("Country Capital Quiz")
+        self.play_box.title("Country Capitals🌍")
 
         self.game_frame = Frame(self.play_box)
         self.game_frame.grid(padx=10, pady=10)
 
-        self.heading_label = Label(self.game_frame, text="Country Capital Quiz",
+        self.heading_label = Label(self.game_frame, text="Country Capital🌍",
                                    font=("Arial", 16, "bold"), padx=5, pady=5)
         self.heading_label.grid(row=0)
 
@@ -96,18 +96,22 @@ class DisplayHints:
                                         bg=background)
         self.help_heading_label.grid(row=0, pady=10)
 
-        help_text = ("When you use the Hints button during the quiz, you will "
+        help_text = ("When you use the 50:50 button during the quiz, you will "
                      "be given a 50/50 chance!\n\n"
                      "Two of the four wrong answers will be removed, leaving "
-                     "you with just two options - the correct answer and one wrong answer.\n\n"
-                     "However, using hints affects your score:\n\n"
-                     "Correct answer (no hint): +10 points\n"
-                     "Correct answer (with hint): +4 points\n\n"
-                     "Wrong answer (no hint):        -3 points\n"
-                     "Wrong answer (with hint):      -5 points\n\n"
-                     "Think carefully before using your 50/50 - "
+                     "you with just two options\n\n"
+                     "However, using the 50:50 component affects your score:\n\n"
+                     "Correct answer no 50:50 gives +10 points\n"
+                     "Correct answer using 50:50 gives +4 points\n\n"
+                     "False answer no 50:50 is -3 points\n"
+                     "False answer with 50:50 is -5 points"
+                     "Think carefully before using your 50:50, "
                      "it could cost you more if you get it wrong!\n\n"
-                     "Good luck! \U0001f340")
+                     "\n"
+                     "When the 50:50 button is pressed this message will display:\n"
+                     "50:50! Two wrong answers have been removed. "
+                     "You now have a 50/50 chance of getting it right. "
+                     "Good luck! \U0001f3af")
 
         self.help_text_label = Label(self.help_frame, text=help_text,
                                      wraplength=350, justify="left",
@@ -131,6 +135,6 @@ class DisplayHints:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Capital Cities")
+    root.title("Country capitals")
     StartGame()
     root.mainloop()

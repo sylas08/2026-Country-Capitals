@@ -20,13 +20,19 @@ class StartGame:
         intro_string = ("In each round you will be invited to complete a quiz game. "
                         "Your goal is to beat the game and guess the capital cities. "
                         "You have to complete the game and you decide the amount of "
-                        "rounds/games you want to play.")
+                        "rounds/games you want to play.\n\n"
+                        "Correct Answers give +10 points\n"
+                        "Correct Answers using 50/50 give +4 points\n"
+                        "False Answers is points\n"
+                        "False Answers using 50/50 is -5 points\n\n"
+                        "(The 50:50 component gives more opportunity to answer the question correctly, "
+                        "so wrong answers using them cost more!)")
 
         choose_string = "How many rounds do you want to play?"
 
         # List of labels to be made (text | font | fg)
         start_labels_list = [
-            ["Capital Cities Quiz", ("Arial", 16, "bold"), None],
+            ["Capital Cities🌍", ("Arial", 16, "bold"), None],
             [intro_string, ("Arial", 12), None],
             [choose_string, ("Arial", 12, "bold"), "#009900"]
         ]
