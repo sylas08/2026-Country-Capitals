@@ -4,7 +4,7 @@ from functools import partial  # To prevent unwanted windows
 from C_03_Get_All_Data_v1 import quiz_data
 
 
-# Helper functions go here
+# Functions go here
 def get_round_questions(how_many):
     """
     Randomly selects questions from the quiz data list.
@@ -25,7 +25,7 @@ def get_question_options(question):
     """
     Builds a shuffled list of 4 answer options for the given question.
     Always includes the correct answer plus 3 randomly chosen wrong answers
-    drawn from the full capitals pool so every game has different distractors.
+    drawn from the full capitals pool so every Quiz has different distractors.
     :param question: a single question entry from quiz_data
     :return: shuffled list of 4 answer strings
     """
@@ -46,9 +46,9 @@ def get_question_options(question):
 
 
 # Classes start here
-class StartGame:
+class StartQuiz:
     """
-    Initial Game interface (asks users how many rounds they
+    Initial Quiz interface (asks users how many rounds they
     would like to play)
     """
 
@@ -61,10 +61,10 @@ class StartGame:
         self.start_frame.grid()
 
         # Strings for labels
-        intro_string = ("In each round you will be invited to complete a quiz game. "
-                        "Your goal is to beat the game and guess the capital cities. "
-                        "You have to complete the game and you decide the amount of "
-                        "rounds/games you want to play.\n\n"
+        intro_string = ("In each round you will be invited to complete a quiz. "
+                        "Your goal is to beat the quiz and guess the capital cities. "
+                        "You have to complete the quiz and you decide the amount of "
+                        "rounds you want to play.\n\n"
                         "Correct Answers give +10 points\n"
                         "Correct Answers using 50/50 give +4 points\n"
                         "False Answers is points\n"
@@ -81,7 +81,7 @@ class StartGame:
             [choose_string, ("Arial", 12, "bold"), "#009900"]
         ]
 
-        # Create labels and add them to the reference list...
+        # Create labels and add them to the reference list
         start_label_ref = []
         for count, item in enumerate(start_labels_list):
             make_label = Label(self.start_frame, text=item[0], font=item[1],
@@ -102,7 +102,7 @@ class StartGame:
                                       width=10)
         self.num_rounds_entry.grid(row=0, column=0, padx=10, pady=10)
 
-        # Create play button...
+        # Create play button
         self.play_button = Button(self.entry_area_frame, font=("Arial", 16, "bold"),
                                   fg="#FFFFFF", bg="#0057D8", text="Play", width=10,
                                   command=self.check_rounds)
@@ -131,7 +131,7 @@ class StartGame:
                 self.num_rounds_entry.delete(0, END)
                 self.choose_label.config(text="How many rounds do you want to play?")
 
-                # Invoke Play class and take across number of rounds
+                # Call on play class and take across number of rounds
                 Play(rounds_wanted)
                 # Hide root window (ie: hide rounds choice window)
                 root.withdraw()
@@ -152,7 +152,7 @@ class StartGame:
 
 class Play:
     """
-    Interface for playing the Capital Cities Quiz
+    Interface for playing the Capital Cities quiz
     """
 
     def __init__(self, how_many):
@@ -171,7 +171,7 @@ class Play:
         self.correct_count = 0
         self.wrong_count = 0
 
-        # Retrieve question list for this game
+        # Retrieve question list for this quiz
         self.question_list = get_round_questions(how_many)
         self.current_question = []
         self.current_options = []
@@ -183,8 +183,8 @@ class Play:
         self.play_box = Toplevel()
         self.play_box.title("Country Capitals")
 
-        self.game_frame = Frame(self.play_box)
-        self.game_frame.grid(padx=10, pady=10)
+        self.quiz_frame = Frame(self.play_box)
+        self.quiz_frame.grid(padx=10, pady=10)
 
         # Body font for most labels
         body_font = ("Arial", "12")
@@ -201,7 +201,7 @@ class Play:
 
         play_labels_ref = []
         for item in play_labels_list:
-            make_label = Label(self.game_frame, text=item[0], font=item[1],
+            make_label = Label(self.quiz_frame, text=item[0], font=item[1],
                                bg=item[2], wraplength=300, justify="left")
             make_label.grid(row=item[3], pady=10, padx=10, sticky="EW")
             play_labels_ref.append(make_label)
@@ -214,7 +214,7 @@ class Play:
         self.results_label = play_labels_ref[4]
 
         # Frame for 4 answer buttons in a 2x2 grid
-        self.answer_frame = Frame(self.game_frame)
+        self.answer_frame = Frame(self.quiz_frame)
         self.answer_frame.grid(row=5)
 
         self.answer_button_ref = []
@@ -231,15 +231,15 @@ class Play:
             self.answer_button_ref.append(make_answer_button)
 
         # Frame to hold hint and stats buttons
-        self.hints_stats_frame = Frame(self.game_frame)
+        self.hints_stats_frame = Frame(self.quiz_frame)
         self.hints_stats_frame.grid(row=6)
 
         # Button details (frame | text | bg | command | width | row | column)
         control_button_list = [
             [self.hints_stats_frame, "50:50🤞", "#FF8000", self.to_hints, 16, 0, 0],
             [self.hints_stats_frame, "Stats", "#333333", self.to_stats, 16, 0, 1],
-            [self.game_frame, "Next Round", "#0057D8", self.new_round, 21, 7, None],
-            [self.game_frame, "End Game \U0001f30d", "#990000", self.close_play, 21, 8, None]
+            [self.quiz_frame, "Next Round", "#0057D8", self.new_round, 21, 7, None],
+            [self.quiz_frame, "End Quiz \U0001f30d", "#990000", self.close_play, 21, 8, None]
         ]
 
         # Create buttons and add to reference list
@@ -255,7 +255,7 @@ class Play:
         self.hints_button = control_ref_list[0]
         self.stats_button = control_ref_list[1]
         self.next_button = control_ref_list[2]
-        self.end_game_button = control_ref_list[3]
+        self.end_quiz_button = control_ref_list[3]
 
         # Once interface is set up, start the first round
         self.new_round()
@@ -287,7 +287,7 @@ class Play:
         self.country_label.config(text=f"{self.current_question[0]}", bg="#90EE90")
 
         # Clear hint label - no background colour when no message showing
-        self.hint_label.config(text="", bg=self.game_frame.cget("bg"))
+        self.hint_label.config(text="", bg=self.quiz_frame.cget("bg"))
 
         # Reset results label
         self.results_label.config(text="Choose A Capital City Below. Good Luck 🍀",
@@ -369,13 +369,13 @@ class Play:
             item.config(state=DISABLED)
         self.hints_button.config(state=DISABLED, bg="#AAAAAA")
 
-        # Check if game is over
+        # Check if quiz is over
         rounds_played = self.rounds_played.get()
         rounds_wanted = self.rounds_wanted.get()
 
         if rounds_played == rounds_wanted:
-            self.next_button.config(state=DISABLED, text="Game Over")
-            self.end_game_button.config(text="Play Again", bg="#006600")
+            self.next_button.config(state=DISABLED, text="Quiz Over")
+            self.end_quiz_button.config(text="Play Again", bg="#006600")
         else:
             self.next_button.config(state=NORMAL)
 
@@ -418,7 +418,7 @@ class Play:
 
     def to_stats(self):
         """
-        Retrieves everything needed to display the game statistics
+        Retrieves everything needed to display the quiz statistics
         """
 
         final_score = self.user_score.get()
@@ -439,7 +439,7 @@ class Play:
 
 class Stats:
     """
-    Displays statistics for the Capital Cities Quiz game
+    Displays statistics for the Capital Cities quiz
     """
 
     def __init__(self, partner, all_stats_info):
@@ -451,7 +451,7 @@ class Stats:
         rounds_played  = all_stats_info[3]
 
         self.stats_box = Toplevel()
-        self.stats_box.title("Game Statistics")
+        self.stats_box.title("Quiz Statistics")
 
         # Disable stats button while window is open
         partner.stats_button.config(state=DISABLED)
@@ -470,10 +470,10 @@ class Stats:
             accuracy = 0
 
         # Build stats strings
-        final_score_string   = f"Final Score:       {final_score}"
-        correct_string       = f"Correct Answers:   {correct_count}"
-        false_string         = f"False Answers:     {false_count}"
-        accuracy_string      = f"Accuracy:          {accuracy:.0f}%"
+        final_score_string= f"Final Score: {final_score}"
+        correct_string= f"Correct Answers: {correct_count}"
+        false_string = f"False Answers: {false_count}"
+        accuracy_string = f"Accuracy: {accuracy:.0f}%"
 
         # Custom comment based on accuracy
         if accuracy == 100:
@@ -496,12 +496,12 @@ class Stats:
 
         # Label list (text | font | sticky)
         all_stats_strings = [
-            ["Statistics",      heading_font, ""],
-            [final_score_string,  normal_font, "W"],
-            [correct_string,      normal_font, "W"],
-            [false_string,        normal_font, "W"],
-            [accuracy_string,     normal_font, "W"],
-            [comment_string,     comment_font, "W"],
+            ["Statistics", heading_font, ""],
+            [final_score_string, normal_font, "W"],
+            [correct_string, normal_font, "W"],
+            [false_string, normal_font, "W"],
+            [accuracy_string, normal_font, "W"],
+            [comment_string, comment_font, "W"],
         ]
 
         stats_label_ref_list = []
@@ -535,5 +535,5 @@ class Stats:
 if __name__ == "__main__":
     root = Tk()
     root.title("Country Capitals")
-    StartGame()
+    StartQuiz()
     root.mainloop()

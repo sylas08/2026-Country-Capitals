@@ -129,7 +129,7 @@ class Stats:
             accuracy = 0
 
         # Build stats strings
-        final_score_string  = f"Final Score:       {final_score}"
+        final_score_string  = f"Success Rate:       {final_score}"
         correct_string      = f"Correct Answers:   {correct_count}"
         false_string        = f"False Answers:     {false_count}"
         accuracy_string     = f"Accuracy:          {accuracy:.0f}%"
@@ -155,7 +155,7 @@ class Stats:
 
         # Label list (text | font | sticky)
         all_stats_strings = [
-            ["Statistics",       heading_font, ""],
+            ["Statistics🎯",       heading_font, ""],
             [final_score_string,  normal_font, "W"],
             [correct_string,      normal_font, "W"],
             [false_string,        normal_font, "W"],
