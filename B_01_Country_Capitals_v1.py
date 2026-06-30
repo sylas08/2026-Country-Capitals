@@ -209,12 +209,12 @@ class Play:
         # Country name label (the question)
         self.country_label = Label(self.game_frame, text="Country Name",
                                    font=("Arial", 14, "bold"),
-                                   bg="#FFFFFF", relief="solid", width=25)
+                                   bg="#FFFFFF", width=25)
         self.country_label.grid(row=3, pady=10, padx=10)
 
         # Hint text label (updated when 50/50 is used)
         self.hint_label = Label(self.game_frame, text="",
-                                font=body_font, bg="#FFF2CC",
+                                font=body_font,
                                 wraplength=300, justify="left")
         self.hint_label.grid(row=4, pady=5, padx=10)
 
@@ -472,10 +472,10 @@ class Stats:
             accuracy = 0
 
         # Build stats strings
-        final_score_string   = f"Final Score:       {final_score}"
-        correct_string       = f"Correct Answers:   {correct_count}"
-        false_string         = f"Wrong Answers:     {false_count}"
-        accuracy_string      = f"Accuracy:          {accuracy:.0f}%"
+        final_score_string= f"Final Score: {final_score}"
+        correct_string= f"Correct Answers: {correct_count}"
+        false_string= f"Wrong Answers: {false_count}"
+        accuracy_string= f"Accuracy: {accuracy:.0f}%"
 
         # Custom comment based on accuracy
         if accuracy == 100:
@@ -498,12 +498,12 @@ class Stats:
 
         # Label list (text | font | sticky)
         all_stats_strings = [
-            ["Statistics",      heading_font, ""],
-            [final_score_string,  normal_font, "W"],
-            [correct_string,      normal_font, "W"],
-            [false_string,        normal_font, "W"],
-            [accuracy_string,     normal_font, "W"],
-            [comment_string,     comment_font, "W"],
+            ["Statistics", heading_font, ""],
+            [final_score_string, normal_font, "W"],
+            [correct_string, normal_font, "W"],
+            [false_string, normal_font, "W"],
+            [accuracy_string, normal_font, "W"],
+            [comment_string, comment_font, "W"],
         ]
 
         stats_label_ref_list = []
@@ -536,6 +536,6 @@ class Stats:
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Capital Cities")
+    root.title("Country capitals")
     StartGame()
     root.mainloop()

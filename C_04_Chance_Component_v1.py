@@ -54,7 +54,7 @@ class Play:
                                    font=("Arial", 16, "bold"), padx=5, pady=5)
         self.heading_label.grid(row=0)
 
-        # Hints button - launches the DisplayHints class
+        # Hints/chance button - launches the DisplayHints class
         self.hints_button = Button(self.game_frame, font=("Arial", 14, "bold"),
                                    text="50:50", width=15, fg="#FFFFFF",
                                    bg="#FF8000", padx=10, pady=10,
